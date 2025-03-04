@@ -1,4 +1,4 @@
-This playbook rolls out configs to Flussonic servers:
+This is an example how to roll out configs to Flussonic servers:
 
 ingest --> dvr --> edge
 
