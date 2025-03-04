@@ -1,0 +1,19 @@
+common_config:
+  http: 80
+  loglevel: debug
+  pulsedb: /var/lib/flussonic
+  session_log: /var/lib/flussonic
+  cluster_key: admin
+  edit_auth: "admin admin"
+
+streams:
+  - name: "Doma_HD"
+    input: "udp://239.1.152.14:1234"
+    meta_program_id: "1000"
+    ingest_ip: "10.17.60.32"
+    dvr_config: "@no-dc-ru-dvr01 14d episodes_url=http://p$$7B10kS489@10.17.56.100:8100/streamer/api/v3/episodes episodes_expiration=7776000"
+    dvr_ips:
+      - ip: "10.17.60.12:8106"
+        priority: 2
+      - ip: "10.17.60.11:8106"
+        priority: 1

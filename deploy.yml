@@ -1,0 +1,38 @@
+- hosts: ingest
+  tasks:
+    - name: create config for ingest
+      template:
+        src: templates/ingest.conf.j2
+        dest: /etc/flussonic/ingest.conf
+      notify: Reload Flussonic
+
+  handlers:
+    - name: Reload Flussonic
+      become: true
+      ansible.builtin.shell: service flussonic reload
+
+- hosts: dvr
+  tasks:
+    - name: create config for dvr
+      template:
+        src: templates/dvr.conf.j2
+        dest: /etc/flussonic/dvr.conf
+      notify: Reload Flussonic
+
+  handlers:
+    - name: Reload Flussonic
+      become: true
+      ansible.builtin.shell: service flussonic reload
+
+- hosts: edge
+  tasks:
+    - name: create config for edge
+      template:
+        src: templates/edge.conf.j2
+        dest: /etc/flussonic/edge.conf
+      notify: Reload Flussonic
+
+  handlers:
+    - name: Reload Flussonic
+      become: true
+      ansible.builtin.shell: service flussonic reload

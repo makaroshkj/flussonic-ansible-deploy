@@ -1,0 +1,21 @@
+http {{ common_config.http }};
+loglevel {{ common_config.loglevel }};
+pulsedb {{ common_config.pulsedb }};
+session_log {{ common_config.session_log }};
+cluster_key {{ common_config.cluster_key }};
+edit_auth {{ common_config.edit_auth }};
+
+{% for template in templates %}
+template {{ template.name }} {
+  {{ template.config }}
+}
+{% endfor %}
+
+{% for stream in streams %}
+ondemand {{ stream.name }} {
+  template {{ templates[0].name }};
+  {% for input in stream.dvr_ips %}
+  input m4f://{{ input.ip }}/{{ stream.name }} priority={{ input.priority }} remote_dvr=chain;
+  {% endfor %}
+}
+{% endfor %}

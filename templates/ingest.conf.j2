@@ -1,0 +1,22 @@
+http {{ common_config.http }};
+loglevel {{ common_config.loglevel }};
+pulsedb {{ common_config.pulsedb }};
+session_log {{ common_config.session_log }};
+cluster_key {{ common_config.cluster_key }};
+edit_auth {{ common_config.edit_auth }};
+
+{% for template in templates %}
+template {{ template.name }} {
+  {{ template.config }}
+}
+{% endfor %}
+
+{% for stream in streams %}
+stream {{ stream.name }} {
+  template {{ templates[0].name }};
+  input {{ stream.input }};
+  title "{{ stream.name }}";
+  meta program_id "{{ stream.meta_program_id }}";
+  transcoder deviceid=6 external=false hw=nvenc deinterlace=adaptive deinterlace_rate=frame;
+}
+{% endfor %}

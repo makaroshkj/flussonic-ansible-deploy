@@ -1,0 +1,13 @@
+http {{ common_config.http }};
+loglevel {{ common_config.loglevel }};
+pulsedb {{ common_config.pulsedb }};
+session_log {{ common_config.session_log }};
+cluster_key {{ common_config.cluster_key }};
+edit_auth {{ common_config.edit_auth }};
+
+{% for stream in streams %}
+stream {{ stream.name }} {
+  input m4s://{{ stream.ingest_ip }}/{{ stream.name }}/tracks-v1v2v3v4v5a1a2t1l1;
+  dvr {{ stream.dvr_config }};
+}
+{% endfor %}

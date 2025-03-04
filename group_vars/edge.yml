@@ -1,0 +1,3 @@
+templates:
+  - name: "cache"
+    config: "on_play auth://HIBOX; add_audio_only; cache /mnt/data/cache01 5900G;"
